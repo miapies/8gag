@@ -1,14 +1,47 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="negro">
+
     <ion-title>
-      Ionic Blank
+      8Gag
     </ion-title>
+
+    <ion-buttons end>
+      <button *ngIf="!usuario" ion-button (click)="login()">Ingresar</button>
+      <button *ngIf="usuario" ion-button (click)="logout()">Salir</button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+  <ion-card *ngFor="let post of _cap.imagenes">
+    <img [src]="post.img" />
+    <ion-card-content>
+      <ion-card-title>
+        {{post.titulo}}
+      </ion-card-title>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col text-right>
+        <button ion-button clear small color="primary" icon-left (click)="compartir(post)">
+          <ion-icon name="share-alt"></ion-icon>
+          Compartir
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-fab *ngIf="usuario" bottom right (click)="mostrar_modal()">
+    <button ion-fab color="danger">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-infinite-scroll [enabled]="hayMas" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando mas imágenes...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
