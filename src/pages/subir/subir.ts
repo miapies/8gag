@@ -40,7 +40,7 @@ export class SubirPage {
       this.imagen64 = imageData;
     }, (err) => {
       // Handle error
-      console.error("ERROR EN CAMARA: " + JSON.stringify(err));
+      console.error("Error en camara: " + JSON.stringify(err));
     });
   }
 
